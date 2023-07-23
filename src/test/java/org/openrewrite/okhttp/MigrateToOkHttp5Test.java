@@ -17,6 +17,7 @@ package org.openrewrite.okhttp;
 
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.openrewrite.DocumentExample;
 import org.openrewrite.config.Environment;
 import org.openrewrite.test.RecipeSpec;
 import org.openrewrite.test.RewriteTest;
@@ -39,6 +40,7 @@ class MigrateToOkHttp5Test implements RewriteTest {
     @Nested
     class Dependencies {
         @Test
+        @DocumentExample
         void mavenDependency5x() {
             rewriteRun(
               //language=xml
