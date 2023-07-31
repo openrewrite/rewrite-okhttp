@@ -19,6 +19,7 @@ import org.openrewrite.ExecutionContext;
 import org.openrewrite.Recipe;
 import org.openrewrite.TreeVisitor;
 import org.openrewrite.java.JavaIsoVisitor;
+import org.openrewrite.java.JavaParser;
 import org.openrewrite.java.JavaTemplate;
 import org.openrewrite.java.MethodMatcher;
 import org.openrewrite.java.tree.Expression;
@@ -41,21 +42,24 @@ public class ReorderRequestBodyCreateArguments extends Recipe {
     }
 
     private static class ReorderArgumentsVisitor extends JavaIsoVisitor<ExecutionContext> {
-        private static MethodMatcher requestBodyCreateMatcher = new MethodMatcher("com.squareup.okhttp.RequestBody create(com.square.okhttp.RequestBody, java.lang.String)");
+        private static MethodMatcher requestBodyCreateMatcher = new MethodMatcher(
+                "okhttp3.RequestBody create(okhttp3.MediaType, java.lang.String)");
         @Override
-        public J.MethodInvocation visitMethodInvocation(J.MethodInvocation mi, ExecutionContext ctx) {
-            J.MethodInvocation m = super.visitMethodInvocation(mi, ctx);
+        public J.MethodInvocation visitMethodInvocation(J.MethodInvocation methodInvocation, ExecutionContext ctx) {
+            J.MethodInvocation mi = super.visitMethodInvocation(methodInvocation, ctx);
 
-            if (!requestBodyCreateMatcher.matches(m)) {
-                return m;
+            if (!requestBodyCreateMatcher.matches(mi)) {
+                return mi;
             }
 
-            Expression firstArg = m.getArguments().get(0);
-            Expression secondArg = m.getArguments().get(1);
+            // TODO Reuse ReorderMethodArguments instead
+            Expression firstArg = mi.getArguments().get(0);
+            Expression secondArg = mi.getArguments().get(1);
 
             return JavaTemplate.builder("RequestBody.create(#{any()}, #{any()})")
+                    .javaParser(JavaParser.fromJavaVersion().classpath("okhttp"))
                     .build()
-                    .apply(getCursor(), m.getCoordinates().replace(), secondArg, firstArg);
+                    .apply(getCursor(), mi.getCoordinates().replace(), secondArg, firstArg);
         }
     }
 }
