@@ -15,15 +15,11 @@
  */
 package org.openrewrite.java.testing.okhttp;
 
-import org.openrewrite.ExecutionContext;
 import org.openrewrite.Recipe;
-import org.openrewrite.TreeVisitor;
-import org.openrewrite.java.JavaIsoVisitor;
-import org.openrewrite.java.JavaParser;
-import org.openrewrite.java.JavaTemplate;
-import org.openrewrite.java.MethodMatcher;
-import org.openrewrite.java.tree.Expression;
-import org.openrewrite.java.tree.J;
+import org.openrewrite.java.ReorderMethodArguments;
+
+import java.util.Collections;
+import java.util.List;
 
 public class ReorderRequestBodyCreateArguments extends Recipe {
     @Override
@@ -37,29 +33,14 @@ public class ReorderRequestBodyCreateArguments extends Recipe {
     }
 
     @Override
-    public TreeVisitor<?, ExecutionContext> getVisitor() {
-        return new ReorderArgumentsVisitor();
-    }
-
-    private static class ReorderArgumentsVisitor extends JavaIsoVisitor<ExecutionContext> {
-        private static MethodMatcher requestBodyCreateMatcher = new MethodMatcher(
-                "okhttp3.RequestBody create(okhttp3.MediaType, java.lang.String)");
-        @Override
-        public J.MethodInvocation visitMethodInvocation(J.MethodInvocation methodInvocation, ExecutionContext ctx) {
-            J.MethodInvocation mi = super.visitMethodInvocation(methodInvocation, ctx);
-
-            if (!requestBodyCreateMatcher.matches(mi)) {
-                return mi;
-            }
-
-            // TODO Reuse ReorderMethodArguments instead
-            Expression firstArg = mi.getArguments().get(0);
-            Expression secondArg = mi.getArguments().get(1);
-
-            return JavaTemplate.builder("RequestBody.create(#{any()}, #{any()})")
-                    .javaParser(JavaParser.fromJavaVersion().classpath("okhttp"))
-                    .build()
-                    .apply(getCursor(), mi.getCoordinates().replace(), secondArg, firstArg);
-        }
+    public List<Recipe> getRecipeList() {
+        return Collections.singletonList(
+                new ReorderMethodArguments(
+                        "okhttp3.RequestBody create(okhttp3.MediaType, java.lang.String)",
+                        new String[]{"contentType", "content"},
+                        new String[]{"content", "contentType"},
+                        null, null
+                )
+        );
     }
 }

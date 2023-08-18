@@ -27,8 +27,8 @@ class ReorderRequestBodyCreateArgumentsTest implements RewriteTest {
     @Override
     public void defaults(RecipeSpec spec) {
         spec
-          .parser(JavaParser.fromJavaVersion().classpath("okhttp"))
-          .recipe(new ReorderRequestBodyCreateArguments());
+          .recipe(new ReorderRequestBodyCreateArguments())
+          .parser(JavaParser.fromJavaVersion().classpath("okhttp", "okio"));
     }
 
     @Test
