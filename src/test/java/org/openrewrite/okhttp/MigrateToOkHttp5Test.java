@@ -44,43 +44,48 @@ class MigrateToOkHttp5Test implements RewriteTest {
         void mavenDependency5x() {
             rewriteRun(
               //language=xml
-              pomXml("""
-                <?xml version="1.0" encoding="UTF-8"?>
-                <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-                  <modelVersion>4.0.0</modelVersion>
-                  <groupId>com.example</groupId>
-                  <artifactId>demo</artifactId>
-                  <version>0.0.1-SNAPSHOT</version>
-                  <dependencies>
-                    <dependency>
-                      <groupId>com.squareup.okhttp3</groupId>
-                      <artifactId>okhttp</artifactId>
-                      <version>4.11.0</version>
-                    </dependency>
-                  </dependencies>
-                </project>
-                """, spec -> spec.after(actual -> {
-                  Matcher matcher = Pattern.compile("<version>(5\\.0\\.\\d+(-(alpha|beta)\\.\\d+)?)</version>").matcher(actual);
-                  assertTrue(matcher.find(), actual);
-                  return """
-                    <?xml version="1.0" encoding="UTF-8"?>
-                    <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                      xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-                      <modelVersion>4.0.0</modelVersion>
-                      <groupId>com.example</groupId>
-                      <artifactId>demo</artifactId>
-                      <version>0.0.1-SNAPSHOT</version>
-                      <dependencies>
-                        <dependency>
-                          <groupId>com.squareup.okhttp3</groupId>
-                          <artifactId>okhttp</artifactId>
-                          <version>%s</version>
-                        </dependency>
-                      </dependencies>
-                    </project>
-                    """.formatted(matcher.group(1));
-              })));
+              pomXml(
+                """
+                  <?xml version="1.0" encoding="UTF-8"?>
+                  <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+                    <modelVersion>4.0.0</modelVersion>
+                    <groupId>com.example</groupId>
+                    <artifactId>demo</artifactId>
+                    <version>0.0.1-SNAPSHOT</version>
+                    <dependencies>
+                      <dependency>
+                        <groupId>com.squareup.okhttp3</groupId>
+                        <artifactId>okhttp</artifactId>
+                        <version>4.11.0</version>
+                      </dependency>
+                    </dependencies>
+                  </project>
+                  """,
+                spec -> spec.after(actual -> {
+                      Matcher matcher = Pattern.compile("<version>(5\\.0\\.\\d+(-(alpha|beta)\\.\\d+)?)</version>").matcher(actual);
+                      assertTrue(matcher.find(), actual);
+                      return """
+                        <?xml version="1.0" encoding="UTF-8"?>
+                        <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+                          <modelVersion>4.0.0</modelVersion>
+                          <groupId>com.example</groupId>
+                          <artifactId>demo</artifactId>
+                          <version>0.0.1-SNAPSHOT</version>
+                          <dependencies>
+                            <dependency>
+                              <groupId>com.squareup.okhttp3</groupId>
+                              <artifactId>okhttp</artifactId>
+                              <version>%s</version>
+                            </dependency>
+                          </dependencies>
+                        </project>
+                        """.formatted(matcher.group(1));
+                  }
+                )
+              )
+            );
         }
     }
 }
