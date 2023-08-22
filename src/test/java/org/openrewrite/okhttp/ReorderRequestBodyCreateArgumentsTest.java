@@ -17,6 +17,7 @@ package org.openrewrite.okhttp;
 
 import org.junit.jupiter.api.Test;
 import org.openrewrite.config.Environment;
+import org.openrewrite.java.JavaParser;
 import org.openrewrite.test.RecipeSpec;
 import org.openrewrite.test.RewriteTest;
 
@@ -26,9 +27,10 @@ class ReorderRequestBodyCreateArgumentsTest implements RewriteTest {
     @Override
     public void defaults(RecipeSpec spec) {
         spec.recipe(Environment.builder()
-          .scanRuntimeClasspath("org.openrewrite.okhttp", "com.squareup.okio")
-          .build()
-          .activateRecipes("org.openrewrite.okhttp.ReorderRequestBodyCreateArguments"));
+            .scanRuntimeClasspath("org.openrewrite.okhttp")
+            .build()
+            .activateRecipes("org.openrewrite.okhttp.ReorderRequestBodyCreateArguments"))
+          .parser(JavaParser.fromJavaVersion().classpath("okhttp", "okio"));
     }
 
     @Test
@@ -55,7 +57,27 @@ class ReorderRequestBodyCreateArgumentsTest implements RewriteTest {
                     RequestBody body = RequestBody.create("some request", mediaType);
                 }
             }
-            """)
+            """
+          )
+        );
+    }
+
+    @Test
+    void dontReorderArguments() {
+        //language=java
+        rewriteRun(
+          java("""
+            import okhttp3.MediaType;
+            import okhttp3.RequestBody;
+                          
+            class MyTest {
+                void testMethod() {
+                    MediaType mediaType = MediaType.parse("application/json");
+                    RequestBody body = RequestBody.create("some request", mediaType);
+                }
+            }
+            """
+          )
         );
     }
 }
