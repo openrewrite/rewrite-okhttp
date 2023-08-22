@@ -16,8 +16,7 @@
 package org.openrewrite.okhttp;
 
 import org.junit.jupiter.api.Test;
-import org.openrewrite.java.JavaParser;
-import org.openrewrite.java.testing.okhttp.ReorderRequestBodyCreateArguments;
+import org.openrewrite.config.Environment;
 import org.openrewrite.test.RecipeSpec;
 import org.openrewrite.test.RewriteTest;
 
@@ -26,9 +25,10 @@ import static org.openrewrite.java.Assertions.java;
 class ReorderRequestBodyCreateArgumentsTest implements RewriteTest {
     @Override
     public void defaults(RecipeSpec spec) {
-        spec
-          .recipe(new ReorderRequestBodyCreateArguments())
-          .parser(JavaParser.fromJavaVersion().classpath("okhttp", "okio"));
+        spec.recipe(Environment.builder()
+          .scanRuntimeClasspath("org.openrewrite.okhttp", "com.squareup.okio")
+          .build()
+          .activateRecipes("org.openrewrite.okhttp.ReorderRequestBodyCreateArguments"));
     }
 
     @Test
