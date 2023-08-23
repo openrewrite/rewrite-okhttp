@@ -39,7 +39,7 @@ recipeList:
 type: specs.openrewrite.org/v1beta/recipe
 name: org.openrewrite.okhttp.ReorderRequestBodyCreateArguments
 displayName: Reorder the arguments of `RequestBody.create()`
-description: Reorder the arguments of `RequestBody.create() to put the `MediaType` argument after the `String` body.
+description: Reorder the arguments of `RequestBody.create()` to put the `MediaType` argument after the `String` body.
 recipeList:
   - org.openrewrite.java.ReorderMethodArguments:
       methodPattern: "okhttp3.RequestBody create(okhttp3.MediaType, java.lang.String)"
