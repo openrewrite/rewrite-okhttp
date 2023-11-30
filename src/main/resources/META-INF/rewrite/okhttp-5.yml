@@ -21,9 +21,9 @@ displayName: Migrate to OkHttp 5.x
 description: This recipe will apply changes commonly needed when migrating to OkHttp 5.x.
 recipeList:
   # https://square.github.io/okhttp/changelogs/changelog/
+  - org.openrewrite.okhttp.UpgradeOkHttp4
   - org.openrewrite.okhttp.UpgradeOkHttp5Dependencies
   - org.openrewrite.okhttp.ReorderRequestBodyCreateArguments
-  - org.openrewrite.okio.UpgradeOkio3
 
 ---
 type: specs.openrewrite.org/v1beta/recipe
