@@ -30,7 +30,7 @@ import static org.openrewrite.maven.Assertions.pomXml;
 class MigrateToOkHttp4Test implements RewriteTest {
 
     public void defaults(RecipeSpec spec) {
-        spec.recipeFromResource("/META-INF/rewrite/okhttp-4.yml", "org.openrewrite.okhttp.UpgradeOkHttp4");
+        spec.recipeFromResources("org.openrewrite.okhttp.UpgradeOkHttp4");
     }
 
     @Nested
