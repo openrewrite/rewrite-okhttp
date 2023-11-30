@@ -18,7 +18,6 @@ package org.openrewrite.okhttp;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.openrewrite.DocumentExample;
-import org.openrewrite.config.Environment;
 import org.openrewrite.test.RecipeSpec;
 import org.openrewrite.test.RewriteTest;
 
@@ -31,10 +30,7 @@ import static org.openrewrite.maven.Assertions.pomXml;
 class MigrateToOkHttp5Test implements RewriteTest {
 
     public void defaults(RecipeSpec spec) {
-        spec.recipe(Environment.builder()
-          .scanRuntimeClasspath("org.openrewrite.okhttp")
-          .build()
-          .activateRecipes("org.openrewrite.okhttp.UpgradeOkHttp5"));
+        spec.recipeFromResources("org.openrewrite.okhttp.UpgradeOkHttp5");
     }
 
     @Nested
