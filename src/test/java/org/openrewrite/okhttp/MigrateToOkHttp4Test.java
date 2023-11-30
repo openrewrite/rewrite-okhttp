@@ -18,7 +18,6 @@ package org.openrewrite.okhttp;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.openrewrite.DocumentExample;
-import org.openrewrite.config.Environment;
 import org.openrewrite.test.RecipeSpec;
 import org.openrewrite.test.RewriteTest;
 
@@ -31,7 +30,7 @@ import static org.openrewrite.maven.Assertions.pomXml;
 class MigrateToOkHttp4Test implements RewriteTest {
 
     public void defaults(RecipeSpec spec) {
-        spec.recipeFromResource("/META-INF/rewrite/okhttp-4.yml", "org.openrewrite.okhttp.UpgradeOkHttp4"));
+        spec.recipeFromResource("/META-INF/rewrite/okhttp-4.yml", "org.openrewrite.okhttp.UpgradeOkHttp4");
     }
 
     @Nested
