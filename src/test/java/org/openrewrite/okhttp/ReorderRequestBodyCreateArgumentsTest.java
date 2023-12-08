@@ -37,7 +37,8 @@ class ReorderRequestBodyCreateArgumentsTest implements RewriteTest {
     void reorderArguments() {
         //language=java
         rewriteRun(
-          java("""
+          java(
+          """
             import okhttp3.MediaType;
             import okhttp3.RequestBody;
 
@@ -66,7 +67,8 @@ class ReorderRequestBodyCreateArgumentsTest implements RewriteTest {
     void dontReorderArguments() {
         //language=java
         rewriteRun(
-          java("""
+          java(
+          """
             import okhttp3.MediaType;
             import okhttp3.RequestBody;
                           
