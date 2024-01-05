@@ -30,7 +30,7 @@ name: org.openrewrite.okhttp.UpgradeOkHttp4Dependencies
 displayName: Migrate OkHttp dependencies to 4.x
 description: Migrate OkHttp dependencies to 4.x.
 recipeList:
-  - org.openrewrite.java.dependencies.ChangeDependency:
-      oldGroupId: com.squareup.okhttp3
-      oldArtifactId: okhttp
+  - org.openrewrite.java.dependencies.UpgradeDependencyVersion:
+      groupId: com.squareup.okhttp3
+      artifactId: okhttp
       newVersion: 4.x

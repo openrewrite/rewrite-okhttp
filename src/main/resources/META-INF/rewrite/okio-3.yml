@@ -34,8 +34,7 @@ recipeList:
       oldArtifactId: okio-multiplatform
       newArtifactId: okio
       newVersion: 3.x
-  - org.openrewrite.java.dependencies.ChangeDependency:
-      oldGroupId: com.squareup.okio
-      oldArtifactId: okio
-      newArtifactId: okio
+  - org.openrewrite.java.dependencies.UpgradeDependencyVersion:
+      groupId: com.squareup.okio
+      artifactId: okio
       newVersion: 3.x
