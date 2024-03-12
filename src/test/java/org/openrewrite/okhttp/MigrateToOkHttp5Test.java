@@ -27,6 +27,7 @@ import static org.openrewrite.maven.Assertions.pomXml;
 
 class MigrateToOkHttp5Test implements RewriteTest {
 
+    @Override
     public void defaults(RecipeSpec spec) {
         spec.recipeFromResources("org.openrewrite.okhttp.UpgradeOkHttp5");
     }
