@@ -5,11 +5,11 @@ plugins {
 group = "org.openrewrite.recipe"
 description = "OkHttp Migration"
 
-val rewriteVersion = rewriteRecipe.rewriteVersion.get()
+val rewriteVersion = "latest.release"
 dependencies {
-    implementation(platform("org.openrewrite:rewrite-bom:$rewriteVersion"))
+    implementation(platform("org.openrewrite:rewrite-bom:8.41.1"))
     implementation("org.openrewrite:rewrite-java")
-    implementation("org.openrewrite.recipe:rewrite-java-dependencies:$rewriteVersion")
+    implementation("org.openrewrite.recipe:rewrite-java-dependencies:1.24.1")
 
     testImplementation("org.openrewrite:rewrite-java-17")
     testImplementation("org.openrewrite:rewrite-test")
