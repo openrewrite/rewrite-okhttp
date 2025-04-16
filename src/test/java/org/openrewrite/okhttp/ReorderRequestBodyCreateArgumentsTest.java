@@ -50,7 +50,8 @@ class ReorderRequestBodyCreateArgumentsTest implements RewriteTest {
                     RequestBody body = RequestBody.create(mediaType, "some request");
                 }
             }
-            """, """
+            """,
+          """
             import okhttp3.MediaType;
             import okhttp3.RequestBody;
                           
