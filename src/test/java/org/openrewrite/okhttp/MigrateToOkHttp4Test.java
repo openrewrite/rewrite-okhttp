@@ -34,8 +34,8 @@ class MigrateToOkHttp4Test implements RewriteTest {
 
     @Nested
     class Dependencies {
-        @Test
         @DocumentExample
+        @Test
         void mavenDependency4x() {
             rewriteRun(
               //language=xml

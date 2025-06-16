@@ -34,8 +34,8 @@ class MigrateToOkHttp5Test implements RewriteTest {
 
     @Nested
     class Dependencies {
-        @Test
         @DocumentExample
+        @Test
         void mavenDependency5x() {
             rewriteRun(
               //language=xml
