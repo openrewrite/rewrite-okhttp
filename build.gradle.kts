@@ -18,7 +18,7 @@ dependencies {
     testImplementation("org.openrewrite:rewrite-maven")
 
     testImplementation("org.openrewrite:rewrite-test")
-    testImplementation("org.junit.jupiter:junit-jupiter-engine:5.+")
+    testImplementation("org.junit.jupiter:junit-jupiter-engine:5.13.3")
 
     testImplementation("com.squareup.okhttp3:okhttp:4.11.0")
 }
