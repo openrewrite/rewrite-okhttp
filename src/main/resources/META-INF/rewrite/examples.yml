@@ -15,7 +15,7 @@
 type: specs.openrewrite.org/v1beta/example
 recipeName: org.openrewrite.okhttp.ReorderRequestBodyCreateArguments
 examples:
-- description: ''
+- description: '`ReorderRequestBodyCreateArgumentsTest#reorderArguments`'
   sources:
   - before: |
       import okhttp3.MediaType;
@@ -42,7 +42,7 @@ examples:
 type: specs.openrewrite.org/v1beta/example
 recipeName: org.openrewrite.okhttp.UpgradeOkHttp4
 examples:
-- description: ''
+- description: '`Dependencies#mavenDependency4x`'
   sources:
   - before: |
       <?xml version="1.0" encoding="UTF-8"?>
@@ -66,7 +66,7 @@ examples:
 type: specs.openrewrite.org/v1beta/example
 recipeName: org.openrewrite.okhttp.UpgradeOkHttp5
 examples:
-- description: ''
+- description: '`Dependencies#mavenDependency5x`'
   sources:
   - before: |
       <?xml version="1.0" encoding="UTF-8"?>
