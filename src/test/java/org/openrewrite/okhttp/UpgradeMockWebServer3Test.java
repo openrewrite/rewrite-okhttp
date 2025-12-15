@@ -26,8 +26,8 @@ import static org.openrewrite.maven.Assertions.pomXml;
 
 class UpgradeMockWebServer3Test implements RewriteTest {
 
-    @Test
     @DocumentExample
+    @Test
     void upgradeMockWebServer3Core() {
         rewriteRun(
           spec -> spec.recipeFromResources("org.openrewrite.okhttp.UpgradeMockWebServer3"),
