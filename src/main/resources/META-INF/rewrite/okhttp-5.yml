@@ -35,6 +35,52 @@ recipeList:
       groupId: com.squareup.okhttp3
       artifactId: okhttp
       newVersion: 5.0.0-alpha.12
+  - org.openrewrite.okhttp.UpgradeMockWebServer3JUnit5
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: org.openrewrite.okhttp.UpgradeMockWebServer3
+displayName: Migrate to MockWebServer3 (core module)
+description: Migrate from the legacy `mockwebserver` artifact to `mockwebserver3` core module without JUnit dependency.
+recipeList:
+  - org.openrewrite.java.dependencies.ChangeDependency:
+      oldGroupId: com.squareup.okhttp3
+      oldArtifactId: mockwebserver
+      newArtifactId: mockwebserver3
+      newVersion: 5.0.0-alpha.12
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: okhttp3.mockwebserver
+      newPackageName: mockwebserver3
+      recursive: true
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: org.openrewrite.okhttp.UpgradeMockWebServer3JUnit4
+displayName: Migrate to MockWebServer3 with JUnit 4
+description: Migrate from the legacy `mockwebserver` artifact to `mockwebserver3-junit4` with JUnit 4 integration.
+recipeList:
+  - org.openrewrite.java.dependencies.ChangeDependency:
+      oldGroupId: com.squareup.okhttp3
+      oldArtifactId: mockwebserver
+      newArtifactId: mockwebserver3-junit4
+      newVersion: 5.0.0-alpha.12
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: okhttp3.mockwebserver
+      newPackageName: mockwebserver3.junit4
+      recursive: true
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: org.openrewrite.okhttp.UpgradeMockWebServer3JUnit5
+displayName: Migrate to MockWebServer3 with JUnit 5
+description: Migrate from the legacy `mockwebserver` artifact to `mockwebserver3-junit5` with JUnit 5 integration.
+recipeList:
+  - org.openrewrite.java.dependencies.ChangeDependency:
+      oldGroupId: com.squareup.okhttp3
+      oldArtifactId: mockwebserver
+      newArtifactId: mockwebserver3-junit5
+      newVersion: 5.0.0-alpha.12
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: okhttp3.mockwebserver
+      newPackageName: mockwebserver3.junit5
+      recursive: true
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: org.openrewrite.okhttp.ReorderRequestBodyCreateArguments
