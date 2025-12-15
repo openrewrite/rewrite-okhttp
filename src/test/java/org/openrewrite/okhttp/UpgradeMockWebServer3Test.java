@@ -17,11 +17,9 @@ package org.openrewrite.okhttp;
 
 import org.junit.jupiter.api.Test;
 import org.openrewrite.DocumentExample;
-import org.openrewrite.test.RecipeSpec;
 import org.openrewrite.test.RewriteTest;
 
-import java.util.regex.Pattern;
-
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.openrewrite.maven.Assertions.pomXml;
 
 class UpgradeMockWebServer3Test implements RewriteTest {
@@ -34,9 +32,7 @@ class UpgradeMockWebServer3Test implements RewriteTest {
           //language=xml
           pomXml(
             """
-              <?xml version="1.0" encoding="UTF-8"?>
-              <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+              <project>
                 <modelVersion>4.0.0</modelVersion>
                 <groupId>com.example</groupId>
                 <artifactId>demo</artifactId>
@@ -51,24 +47,13 @@ class UpgradeMockWebServer3Test implements RewriteTest {
                 </dependencies>
               </project>
               """,
-            spec -> spec.after(actual -> """
-              <?xml version="1.0" encoding="UTF-8"?>
-              <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-                <modelVersion>4.0.0</modelVersion>
-                <groupId>com.example</groupId>
-                <artifactId>demo</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
-                <dependencies>
-                  <dependency>
-                    <groupId>com.squareup.okhttp3</groupId>
-                    <artifactId>mockwebserver3</artifactId>
-                    <version>%s</version>
-                    <scope>test</scope>
-                  </dependency>
-                </dependencies>
-              </project>
-              """.formatted(Pattern.compile("<version>(5\\..*)</version>").matcher(actual).results().findFirst().orElseThrow().group(1))
+            spec -> spec.after(actual ->
+              assertThat(actual)
+                .doesNotContain("<artifactId>mockwebserver</artifactId>")
+                .doesNotContain("<version>4.11.0</version>")
+                .contains("<artifactId>mockwebserver3</artifactId>")
+                .containsPattern("<version>(5\\..*)</version>")
+                .actual()
             )
           )
         );
@@ -81,9 +66,7 @@ class UpgradeMockWebServer3Test implements RewriteTest {
           //language=xml
           pomXml(
             """
-              <?xml version="1.0" encoding="UTF-8"?>
-              <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+              <project>
                 <modelVersion>4.0.0</modelVersion>
                 <groupId>com.example</groupId>
                 <artifactId>demo</artifactId>
@@ -98,24 +81,13 @@ class UpgradeMockWebServer3Test implements RewriteTest {
                 </dependencies>
               </project>
               """,
-            spec -> spec.after(actual -> """
-              <?xml version="1.0" encoding="UTF-8"?>
-              <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-                <modelVersion>4.0.0</modelVersion>
-                <groupId>com.example</groupId>
-                <artifactId>demo</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
-                <dependencies>
-                  <dependency>
-                    <groupId>com.squareup.okhttp3</groupId>
-                    <artifactId>mockwebserver3-junit4</artifactId>
-                    <version>%s</version>
-                    <scope>test</scope>
-                  </dependency>
-                </dependencies>
-              </project>
-              """.formatted(Pattern.compile("<version>(5\\..*)</version>").matcher(actual).results().findFirst().orElseThrow().group(1))
+            spec -> spec.after(actual ->
+              assertThat(actual)
+                .doesNotContain("<artifactId>mockwebserver</artifactId>")
+                .doesNotContain("<version>4.11.0</version>")
+                .contains("<artifactId>mockwebserver3-junit4</artifactId>")
+                .containsPattern("<version>(5\\..*)</version>")
+                .actual()
             )
           )
         );
@@ -128,9 +100,7 @@ class UpgradeMockWebServer3Test implements RewriteTest {
           //language=xml
           pomXml(
             """
-              <?xml version="1.0" encoding="UTF-8"?>
-              <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+              <project>
                 <modelVersion>4.0.0</modelVersion>
                 <groupId>com.example</groupId>
                 <artifactId>demo</artifactId>
@@ -145,24 +115,13 @@ class UpgradeMockWebServer3Test implements RewriteTest {
                 </dependencies>
               </project>
               """,
-            spec -> spec.after(actual -> """
-              <?xml version="1.0" encoding="UTF-8"?>
-              <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-                <modelVersion>4.0.0</modelVersion>
-                <groupId>com.example</groupId>
-                <artifactId>demo</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
-                <dependencies>
-                  <dependency>
-                    <groupId>com.squareup.okhttp3</groupId>
-                    <artifactId>mockwebserver3-junit5</artifactId>
-                    <version>%s</version>
-                    <scope>test</scope>
-                  </dependency>
-                </dependencies>
-              </project>
-              """.formatted(Pattern.compile("<version>(5\\..*)</version>").matcher(actual).results().findFirst().orElseThrow().group(1))
+            spec -> spec.after(actual ->
+              assertThat(actual)
+                .doesNotContain("<artifactId>mockwebserver</artifactId>")
+                .doesNotContain("<version>4.11.0</version>")
+                .contains("<artifactId>mockwebserver3-junit5</artifactId>")
+                .containsPattern("<version>(5\\..*)</version>")
+                .actual()
             )
           )
         );
