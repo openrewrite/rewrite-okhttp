@@ -19,6 +19,8 @@ type: specs.openrewrite.org/v1beta/recipe
 name: org.openrewrite.okio.UpgradeOkio3
 displayName: Migrate to Okio 3.x
 description: This recipe will apply changes commonly needed when migrating to Okio 3.x.
+preconditions:
+  - org.openrewrite.Singleton
 recipeList:
   # https://square.github.io/okio/changelog/
   - org.openrewrite.okio.UpgradeOkio3Dependencies
@@ -28,6 +30,8 @@ type: specs.openrewrite.org/v1beta/recipe
 name: org.openrewrite.okio.UpgradeOkio3Dependencies
 displayName: Migrate Okio dependencies to 3.x
 description: Migrate Okio dependencies to 3.x.
+preconditions:
+  - org.openrewrite.Singleton
 recipeList:
   - org.openrewrite.java.dependencies.ChangeDependency:
       oldGroupId: com.squareup.okio

@@ -19,6 +19,8 @@ type: specs.openrewrite.org/v1beta/recipe
 name: org.openrewrite.okhttp.UpgradeOkHttp5
 displayName: Migrate to OkHttp 5.x
 description: This recipe will apply changes commonly needed when migrating to OkHttp 5.x.
+preconditions:
+  - org.openrewrite.Singleton
 recipeList:
   # https://square.github.io/okhttp/changelogs/changelog/
   - org.openrewrite.okhttp.UpgradeOkHttp4
@@ -30,6 +32,8 @@ type: specs.openrewrite.org/v1beta/recipe
 name: org.openrewrite.okhttp.UpgradeOkHttp5Dependencies
 displayName: Migrate OkHttp dependencies to 5.x
 description: Migrate OkHttp dependencies to 5.x.
+preconditions:
+  - org.openrewrite.Singleton
 recipeList:
   - org.openrewrite.java.dependencies.UpgradeDependencyVersion:
       groupId: com.squareup.okhttp3
@@ -41,6 +45,8 @@ type: specs.openrewrite.org/v1beta/recipe
 name: org.openrewrite.okhttp.UpgradeMockWebServer3
 displayName: Migrate to MockWebServer3 (core module)
 description: Migrate from the legacy `mockwebserver` artifact to `mockwebserver3` core module without JUnit dependency.
+preconditions:
+  - org.openrewrite.Singleton
 recipeList:
   - org.openrewrite.java.dependencies.ChangeDependency:
       oldGroupId: com.squareup.okhttp3
@@ -56,6 +62,8 @@ type: specs.openrewrite.org/v1beta/recipe
 name: org.openrewrite.okhttp.UpgradeMockWebServer3JUnit4
 displayName: Migrate to MockWebServer3 with JUnit 4
 description: Migrate from the legacy `mockwebserver` artifact to `mockwebserver3-junit4` with JUnit 4 integration.
+preconditions:
+  - org.openrewrite.Singleton
 recipeList:
   - org.openrewrite.java.dependencies.ChangeDependency:
       oldGroupId: com.squareup.okhttp3
@@ -71,6 +79,8 @@ type: specs.openrewrite.org/v1beta/recipe
 name: org.openrewrite.okhttp.UpgradeMockWebServer3JUnit5
 displayName: Migrate to MockWebServer3 with JUnit 5
 description: Migrate from the legacy `mockwebserver` artifact to `mockwebserver3-junit5` with JUnit 5 integration.
+preconditions:
+  - org.openrewrite.Singleton
 recipeList:
   - org.openrewrite.java.dependencies.ChangeDependency:
       oldGroupId: com.squareup.okhttp3
@@ -86,6 +96,8 @@ type: specs.openrewrite.org/v1beta/recipe
 name: org.openrewrite.okhttp.ReorderRequestBodyCreateArguments
 displayName: Reorder the arguments of `RequestBody.create()`
 description: Reorder the arguments of `RequestBody.create()` to put the `MediaType` argument after the `String` body.
+preconditions:
+  - org.openrewrite.Singleton
 recipeList:
   - org.openrewrite.java.ReorderMethodArguments:
       methodPattern: "okhttp3.RequestBody create(okhttp3.MediaType, java.lang.String)"

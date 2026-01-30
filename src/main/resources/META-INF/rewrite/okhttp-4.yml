@@ -19,6 +19,8 @@ type: specs.openrewrite.org/v1beta/recipe
 name: org.openrewrite.okhttp.UpgradeOkHttp4
 displayName: Migrate to OkHttp 4.x
 description: This recipe will apply changes commonly needed when migrating to OkHttp 4.x.
+preconditions:
+  - org.openrewrite.Singleton
 recipeList:
   # https://square.github.io/okhttp/changelogs/upgrading_to_okhttp_4/
   - org.openrewrite.okhttp.UpgradeOkHttp4Dependencies
@@ -29,6 +31,8 @@ type: specs.openrewrite.org/v1beta/recipe
 name: org.openrewrite.okhttp.UpgradeOkHttp4Dependencies
 displayName: Migrate OkHttp dependencies to 4.x
 description: Migrate OkHttp dependencies to 4.x.
+preconditions:
+  - org.openrewrite.Singleton
 recipeList:
   - org.openrewrite.java.dependencies.UpgradeDependencyVersion:
       groupId: com.squareup.okhttp3
