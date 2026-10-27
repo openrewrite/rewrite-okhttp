@@ -17,6 +17,7 @@ package org.openrewrite.okhttp;
 
 import org.junit.jupiter.api.Test;
 import org.openrewrite.DocumentExample;
+import org.openrewrite.InMemoryExecutionContext;
 import org.openrewrite.config.Environment;
 import org.openrewrite.java.JavaParser;
 import org.openrewrite.test.RecipeSpec;
@@ -31,7 +32,7 @@ class ReorderRequestBodyCreateArgumentsTest implements RewriteTest {
             .scanRuntimeClasspath("org.openrewrite.okhttp")
             .build()
             .activateRecipes("org.openrewrite.okhttp.ReorderRequestBodyCreateArguments"))
-          .parser(JavaParser.fromJavaVersion().classpath("okhttp", "okio"));
+          .parser(JavaParser.fromJavaVersion().classpathFromResources(new InMemoryExecutionContext(), "okhttp-4", "okio-jvm-3"));
     }
 
     @DocumentExample
