@@ -6,6 +6,11 @@ plugins {
 group = "org.openrewrite.recipe"
 description = "OkHttp Migration"
 
+recipeDependencies {
+    testParserClasspath("com.squareup.okhttp3:okhttp:4.11.0")
+    testParserClasspath("com.squareup.okio:okio-jvm:3.2.0")
+}
+
 val rewriteVersion = rewriteRecipe.rewriteVersion.get()
 dependencies {
     implementation(platform("org.openrewrite:rewrite-bom:$rewriteVersion"))
@@ -18,6 +23,4 @@ dependencies {
     testImplementation("org.openrewrite:rewrite-maven")
 
     testImplementation("org.openrewrite:rewrite-test")
-
-    testImplementation("com.squareup.okhttp3:okhttp:4.11.0")
 }
